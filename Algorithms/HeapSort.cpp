@@ -75,3 +75,59 @@ int main()
 	
 	
 }
+
+
+
+void heapSort(int arr[], int n)  {
+    buildHeap(arr, n);
+    for (int i=n-1; i>=0; i--)  {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+} */
+// The functions should be written in a way that array become sorted 
+// in increasing order when above heapSort() is called.
+// To heapify a subtree rooted with node i which is  an index in arr[]. 
+// n is size of heap. This function  is used in above heapSor()
+void heapify(int arr[], int n, int i)  {
+      int k = i;
+      int l = 2*k + 1;
+      int r = 2*k + 2;
+      while(r<n)
+      {
+          if(arr[k] >= arr[l] && arr[k] >= arr[r]) break;
+          if(arr[r]>arr[l])
+          {
+              swap(arr[r],arr[k]);
+              k = r;
+          }
+          else
+          {
+              swap(arr[l],arr[k]);
+              k = l;
+          }
+          l = 2*k + 1;
+          r = 2*k + 2;
+      }
+      if(l < n)
+      {
+          if(arr[l] > arr[k])
+          {
+              swap(arr[l],arr[k]);
+          }
+      }
+}
+// Rearranges input array so that it becomes a max heap
+void buildHeap(int arr[], int n)  { 
+    for(int i=0;i<n;++i)
+    {
+        int j = i;
+        while(j!=0)
+        {
+            int par = (j-1)>>1;
+           // if(arr[par] >= arr[j]) break;
+            if(arr[par] < arr[j]) swap(arr[par],arr[j]);
+            j = par;
+        }
+    }
+}
